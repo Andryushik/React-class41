@@ -1,5 +1,7 @@
 # Ecommerce Project
 
+## Open it on Netlify [https://hyf-ecommerce-andrei.netlify.app/](https://hyf-ecommerce-andrei.netlify.app/)
+
 ## Available Scripts
 
 In the project directory, you can run:
