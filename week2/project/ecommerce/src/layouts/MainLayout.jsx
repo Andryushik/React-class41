@@ -6,7 +6,7 @@ const MainLayout = () => {
     <>
       <h1>Products</h1>
       <Categories />
-      <Outlet />;
+      <Outlet />
     </>
   );
 };

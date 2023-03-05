@@ -8,24 +8,31 @@ const ProductPage = () => {
 
   const { data, error, isLoading } = useFetch(url);
 
-  if (isLoading) return <h4>Loading...</h4>;
-  if (error)
-    return (
-      <h4>
-        Error! Probably this product doesn't exists, try other one please.
-      </h4>
-    );
-  const { title, description, image } = data;
-
   return (
     <div className="product-page">
-      <h1>{title}</h1>
-      <div className="product-info">
-        <div>
-          <p>{description}</p>
-        </div>
-        <img className="product--image-big" src={image} alt={title} />
-      </div>
+      {isLoading && <h4>Loading...</h4>}
+
+      {error && (
+        <h4>
+          Error! Probably this product doesn't exists, try other one please.
+        </h4>
+      )}
+
+      {data && (
+        <>
+          <h1>{data.title}</h1>
+          <div className="product-info">
+            <div>
+              <p>{data.description}</p>
+            </div>
+            <img
+              className="product--image-big"
+              src={data.image}
+              alt={data.title}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

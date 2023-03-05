@@ -11,16 +11,22 @@ const Products = () => {
 
   const { data, error, isLoading } = useFetch(url);
 
-  if (isLoading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error!</h4>;
-
   let chosenCategoryProducts = data;
 
   return (
     <div className="products">
-      {chosenCategoryProducts.map((product) => {
-        return <Product key={product.id} {...product} />;
-      })}
+      {isLoading && <h4>Loading...</h4>}
+
+      {error && (
+        <h4>
+          Error! Probably this product doesn't exists, try other one please.
+        </h4>
+      )}
+
+      {data &&
+        chosenCategoryProducts.map((product) => {
+          return <Product key={product.id} {...product} />;
+        })}
     </div>
   );
 };
