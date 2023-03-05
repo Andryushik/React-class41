@@ -1,17 +1,24 @@
+import { useParams } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
 import Product from './Product';
-import allProducts from '../fake-data/all-products';
 
-const Products = ({ category }) => {
-  let filteredProducts = allProducts;
-  if (category !== 'all') {
-    filteredProducts = allProducts.filter((product) => {
-      return `FAKE: ${product.category}` === category;
-    });
-  }
+const Products = () => {
+  const params = useParams();
+  const chosenCategory = params.category;
+  const url = chosenCategory
+    ? `https://fakestoreapi.com/products/category/${chosenCategory}`
+    : 'https://fakestoreapi.com/products';
+
+  const { data, error, isLoading } = useFetch(url);
+
+  if (isLoading) return <h4>Loading...</h4>;
+  if (error) return <h4>Error!</h4>;
+
+  let chosenCategoryProducts = data;
 
   return (
     <div className="products">
-      {filteredProducts.map((product) => {
+      {chosenCategoryProducts.map((product) => {
         return <Product key={product.id} {...product} />;
       })}
     </div>

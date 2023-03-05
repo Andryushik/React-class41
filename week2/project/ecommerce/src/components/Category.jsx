@@ -1,6 +1,6 @@
-const Category = ({ className, chooseCategory, categoryName }) => {
+const Category = ({ categoryName, index }) => {
   return (
-    <div className={className} onClick={() => chooseCategory(categoryName)}>
+    <div key={index} className="categories--item">
       {categoryName}
     </div>
   );
