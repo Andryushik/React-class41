@@ -4,9 +4,9 @@
  */
 
 function UserListItem({ user }) {
-  const { firstName, lastName, role } = user;
+  const { id, firstName, lastName, role } = user;
 
-  return <li>{`${firstName} ${lastName} (${role})`}</li>;
+  return <li key={id}>{`${firstName} ${lastName} (${role})`}</li>;
 }
 
 export default UserListItem;
