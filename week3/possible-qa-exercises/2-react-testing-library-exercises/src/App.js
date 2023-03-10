@@ -18,7 +18,7 @@ function App() {
   return (
     <div>
       <UserListItem
-        user={{ id: 1, firstName: 'John', lastName: 'Doe', role: 'Admin' }}
+        user={{ firstName: 'John', lastName: 'Doe', role: 'Admin' }}
       />
       <hr />
       <UserDetailsForm

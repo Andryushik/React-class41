@@ -1,6 +1,6 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from '@testing-library/react';
 
-import ChuckNorrisJoke from "./3-ChuckNorrisJoke";
+import ChuckNorrisJoke from './3-ChuckNorrisJoke';
 
 /**
  * ChuckNorrisJoke is a component that fetches a joke from an api and displays it on the screen.
@@ -17,30 +17,33 @@ import ChuckNorrisJoke from "./3-ChuckNorrisJoke";
 
 const joke = "Chuck Norris's log statements are always at the FATAL level.";
 const testSuccessfullResponse = JSON.stringify({
-  type: "success",
+  type: 'success',
   value: {
     id: 538,
     joke,
-    categories: ["nerdy"],
+    categories: ['nerdy'],
   },
 });
 
-describe("ChuckNorrisJoke", () => {
-  it("should show the Loading text when the component is still loading", async () => {
-    //TODO: Fill in!
-    expect(true).toBe(false);
+describe('ChuckNorrisJoke', () => {
+  it('should show the Loading text when the component is still loading', async () => {
+    render(<ChuckNorrisJoke />);
+    // const submitButton = screen.getByRole('button');
+    // fireEvent.click(submitButton);
+    // expect().toBe();
+    // expect().toEqual();
   });
 
-  it("should show the joke the fetch returns", async () => {
-    //TODO: Fill in!
-    expect(true).toBe(false);
-  });
+  // it("should show the joke the fetch returns", async () => {
+  //   //TODO: Fill in!
+  //   expect(true).toBe(false);
+  // });
 
-  it("should show an error message if the fetch fails", async () => {
-    //TODO: FIll in!
-    //EXTRA CHALLENGE: You will find that you will get a `console.error` log because the component calls it.
-    //     The test will pass but it will clog up your test runs which will become a problem.
-    //     Think of a way to not change the component but also not get an error message.
-    expect(true).toBe(false);
-  });
+  // it("should show an error message if the fetch fails", async () => {
+  //   //TODO: FIll in!
+  //   //EXTRA CHALLENGE: You will find that you will get a `console.error` log because the component calls it.
+  //   //     The test will pass but it will clog up your test runs which will become a problem.
+  //   //     Think of a way to not change the component but also not get an error message.
+  //   expect(true).toBe(false);
+  // });
 });

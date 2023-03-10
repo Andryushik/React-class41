@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 
-import UserListItem from "./1-UserListItem";
+import UserListItem from './1-UserListItem';
 
 /**
  * UserListItem is a very simple component that places the data given into an <li> element.
@@ -11,14 +11,18 @@ import UserListItem from "./1-UserListItem";
 // You can use this object as the props to send. By putting it outside of the `describe` function we make it available for every test.
 // This makes it easier to update all of the tests if the main component changes
 const testUser = {
-  firstName: "John",
-  lastName: "Doe",
-  role: "Admin",
+  firstName: 'John',
+  lastName: 'Doe',
+  role: 'Admin',
 };
 
-describe("UserListItem", () => {
-  it("Displays all of the fields ", () => {
-    // TODO: FILL THIS IN
-    expect(true).toBe(false);
+describe('UserListItem', () => {
+  it('Displays all of the fields', () => {
+    render(<UserListItem user={testUser} />);
+    expect(screen.getByText(/John Doe \(Admin\)/i)).toBeInTheDocument();
+  });
+  it('Displays li item', () => {
+    render(<UserListItem user={testUser} />);
+    expect(screen.getByRole('listitem')).toBeInTheDocument();
   });
 });
