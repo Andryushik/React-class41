@@ -1,31 +1,31 @@
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-import UserListItem from './1-UserListItem';
-import UserDetailsForm from './2-UserDetailsForm';
-import ChuckNorrisJoke from './3-ChuckNorrisJoke';
-import RoutingApp from './4-Routing/RoutingApp';
-import { LoggedInUserContextProvider } from './5-Context/LoggedInUserContext';
-import MyProfile from './5-Context/MyProfile';
-import useListState from './6-useListState';
+import UserListItem from "./1-UserListItem";
+import UserDetailsForm from "./2-UserDetailsForm";
+import ChuckNorrisJoke from "./3-ChuckNorrisJoke";
+import RoutingApp from "./4-Routing/RoutingApp";
+import { LoggedInUserContextProvider } from "./5-Context/LoggedInUserContext";
+import MyProfile from "./5-Context/MyProfile";
+import useListState from "./6-useListState";
 
 function App() {
   const { list, addElement, removeElementWithId } = useListState([
-    { id: uuidv4(), label: 'First item' },
+    { id: uuidv4(), label: "First item" },
   ]);
-  const [newItemLabel, setNewItemLabel] = useState('');
+  const [newItemLabel, setNewItemLabel] = useState("");
 
   return (
     <div>
       <UserListItem
-        user={{ firstName: 'John', lastName: 'Doe', role: 'Admin' }}
+        user={{ firstName: "John", lastName: "Doe", role: "Admin" }}
       />
       <hr />
       <UserDetailsForm
         initialUserValues={{
-          firstName: 'John',
-          lastName: 'Doe',
-          role: 'Admin',
+          firstName: "John",
+          lastName: "Doe",
+          role: "Admin",
         }}
         onSubmit={() => {}}
       />
@@ -33,16 +33,14 @@ function App() {
       <ChuckNorrisJoke />
       <RoutingApp />
       <hr />
-      <LoggedInUserContextProvider initialUser={{ name: 'John' }}>
+      <LoggedInUserContextProvider initialUser={{ name: "John" }}>
         <MyProfile />
       </LoggedInUserContextProvider>
       <hr />
       <ul>
         {list.map((item) => {
           return (
-            <li key={item.id} onClick={() => removeElementWithId(item.id)}>
-              {item.label}
-            </li>
+            <li onClick={() => removeElementWithId(item.id)}>{item.label}</li>
           );
         })}
       </ul>

@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { useContext } from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 import LoggedInUserContext, {
   LoggedInUserContextProvider,
-} from './LoggedInUserContext';
+} from "./LoggedInUserContext";
 
 /**
  * Contexts may look like they complicate testing, but actually they provide a nice way of dividing your logic and rendering.
@@ -24,10 +24,10 @@ import LoggedInUserContext, {
  * Well the way to do that is to create our own custom TestComponent!
  */
 const TEST_ID = {
-  LOGGED_IN_USER: 'loggedInUser',
-  IS_LOGGED_IN: 'isLoggedIn',
-  LOGIN: 'login',
-  LOGOUT: 'logout',
+  LOGGED_IN_USER: "loggedInUser",
+  IS_LOGGED_IN: "isLoggedIn",
+  LOGIN: "login",
+  LOGOUT: "logout",
 };
 /** We provide a prop that can be given, this will be given to the login function if you click on it */
 function TestComponent({ userToLogin }) {
@@ -52,25 +52,12 @@ function TestComponent({ userToLogin }) {
   );
 }
 
-describe('LoggedInUserContext', () => {
-  it('Correctly sets the user as loggedIn if an initialUser is given', () => {
-    render(
-      <LoggedInUserContextProvider>
-        <TestComponent initialUser={TEST_ID} />
-      </LoggedInUserContextProvider>,
-    );
+describe("LoggedInUserContext", () => {
+  it("Correctly sets the user as loggedIn if an initialUser is given", () => {});
 
-    expect(screen.getByTestId(TEST_ID.LOGGED_IN_USER)).toHaveTextContent(
-      'loggedInUser',
-    );
-    // expect(screen.getByTestId(TEST_ID.IS_LOGGED_IN)).toHaveTextContent(
-    //   'isLoggedIn',
-    // );
-  });
+  it("Correctly sets the user as logged out if no initialUser is given", () => {});
 
-  // it('Correctly sets the user as logged out if no initialUser is given', () => {});
+  it("logs the user in if you use the login function", () => {});
 
-  // it('logs the user in if you use the login function', () => {});
-
-  // it('logs the user out if you use the logout function', () => {});
+  it("logs the user out if you use the logout function", () => {});
 });
