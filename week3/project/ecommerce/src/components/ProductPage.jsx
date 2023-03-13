@@ -1,5 +1,8 @@
 import { useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import { useFavorites } from './FavoritesContext';
+import heartRegular from '../assets/heart-regular.svg';
+import heartSolid from '../assets/heart-solid.svg';
 
 const ProductPage = () => {
   const params = useParams();
@@ -7,9 +10,10 @@ const ProductPage = () => {
   const url = `https://fakestoreapi.com/products/${id}`;
 
   const { data, error, isLoading } = useFetch(url);
+  const { favorites, toggleFavorite } = useFavorites();
 
   return (
-    <div className="product-page">
+    <>
       {isLoading && <h4>Loading...</h4>}
 
       {error && (
@@ -21,19 +25,31 @@ const ProductPage = () => {
       {data && (
         <>
           <h1>{data.title}</h1>
-          <div className="product-info">
-            <div>
-              <p>{data.description}</p>
+          <div className="product-page">
+            <div
+              className="product-image--favorite-container"
+              onClick={() => toggleFavorite(data.id)}
+            >
+              <img
+                src={favorites.includes(data.id) ? heartSolid : heartRegular}
+                alt="fav-icon"
+              />
             </div>
-            <img
-              className="product--image-big"
-              src={data.image}
-              alt={data.title}
-            />
+
+            <div className="product-info">
+              <div>
+                <p>{data.description}</p>
+              </div>
+              <img
+                className="product--image-big"
+                src={data.image}
+                alt={data.title}
+              />
+            </div>
           </div>
         </>
       )}
-    </div>
+    </>
   );
 };
 
