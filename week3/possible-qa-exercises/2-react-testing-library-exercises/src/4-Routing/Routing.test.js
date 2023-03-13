@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
-
-import Routing from "./Routing";
-import TEST_ID from "./testids";
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import Routing from './Routing';
+import TEST_IDS from './testids';
 
 /**
  * Routing is a very simple routing component that looks to route a couple of pages for the user.
@@ -12,14 +12,46 @@ import TEST_ID from "./testids";
  * - Check that a route that has a parameter (:id usually) correctly grabs that parameter.
  *
  * You may be wondering how it works with buttons on pages that redirect to other pages (a list component going to a details component for example). That is also the responsibility of the tests in that component.
+ * https://testing-library.com/docs/example-react-router/
  */
 
-describe("Routing", () => {
-  it("Goes to the home page on /", () => {});
+describe('Routing', () => {
+  it('Goes to the home page on /', () => {
+    render(<Routing />, { wrapper: BrowserRouter });
+    expect(screen.getByTestId(TEST_IDS.HOME_CONTAINER)).toBeInTheDocument();
+  });
 
-  it("Goes to the users page on /users", () => {});
+  it('Goes to the users page on /users', async () => {
+    const route = '/users';
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Routing />
+      </MemoryRouter>,
+    );
+    expect(
+      screen.getByTestId(TEST_IDS.USER_LIST_CONTAINER),
+    ).toBeInTheDocument();
+  });
 
-  it("Goes to the user details page on /users/:id", () => {});
+  it('Goes to the user details page on /users/:id', () => {
+    const route = '/users/:id';
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Routing />
+      </MemoryRouter>,
+    );
+    expect(
+      screen.getByTestId(TEST_IDS.USER_DETAILS_CONTAINER),
+    ).toBeInTheDocument();
+  });
 
-  it("Goes to the home page if the url is not recognized", () => {});
+  it('Goes to the home page if the url is not recognized', () => {
+    const badRoute = '/some/bad/route';
+    render(
+      <MemoryRouter initialEntries={[badRoute]}>
+        <Routing />
+      </MemoryRouter>,
+    );
+    expect(screen.getByTestId(TEST_IDS.HOME_CONTAINER)).toBeInTheDocument();
+  });
 });
